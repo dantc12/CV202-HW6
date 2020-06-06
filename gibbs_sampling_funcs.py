@@ -1,5 +1,4 @@
 import numpy as np
-import time
 from copy import copy
 
 
@@ -29,12 +28,12 @@ def MRF_iteration(padded_mat, Temp, lat_size):
     return padded_mat
 
 
-def Gibbs_sampler(Temp, iterations, lat_size):
-    s = time.time()
+def gibbs_sampler(Temp, iterations, lat_size):
+    # s = time.time()
     initial_mat = np.random.randint(low=0, high=2, size=(lat_size, lat_size))*2 - 1
     padded_mat = np.pad(initial_mat, ((1, 1), (1, 1)), 'constant')
     for iteration in range(iterations):
         padded_mat = MRF_iteration(padded_mat, Temp, lat_size)
-    e = time.time()
-#     print("Sampling one sample took " + str(round(e-s, 2)) + " seconds.")
+    # e = time.time()
+    # print("Sampling one sample took " + str(round(e-s, 2)) + " seconds.")
     return padded_mat[1:-1, 1:-1]
